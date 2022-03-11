@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("edureka1/edureka") //tag: username/repositoryname
+        app = docker.build("manihere/mani-devops-demo") //tag: username/repositoryname
     }
 
     stage('Test image') {
@@ -29,7 +29,7 @@ node {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. 
 		 * Password if fetched from Jenkins in docker-hub-credentials, under Credentials > System > Global Credentials */
-        docker.withRegistry('https://registry.hub.docker.com', 'jenkins-credentials') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
